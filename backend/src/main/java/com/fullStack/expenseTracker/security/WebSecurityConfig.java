@@ -72,7 +72,8 @@ public class WebSecurityConfig {
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth ->
-                        auth.requestMatchers("/mypockit/auth/**").permitAll()
+                        auth.requestMatchers("/", "/health", "/actuator/health").permitAll()
+                                .requestMatchers("/mypockit/auth/**").permitAll()
                                 .requestMatchers("/mypockit/transactiontype/**").permitAll()
                                 .requestMatchers("/mypockit/category/**").permitAll()
                                 .requestMatchers("/mypockit/transaction/**").permitAll()
