@@ -52,6 +52,8 @@ public class WebSecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
         // Support multiple origins (comma-separated)
         List<String> origins = Arrays.asList(allowedOrigins.split(","));
+        // Trim whitespace from each origin
+        origins = origins.stream().map(String::trim).toList();
         configuration.setAllowedOrigins(origins);
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
