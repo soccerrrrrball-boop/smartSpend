@@ -28,7 +28,12 @@ public class AuthEntryPointJwt implements AuthenticationEntryPoint {
         // Only log as WARN for expected cases (health checks, root path, etc.)
         // Log as ERROR for actual API endpoints
         String path = request.getServletPath();
-        if (path.equals("/") || path.equals("/health") || path.equals("/actuator/health")) {
+        if (path == null || path.isEmpty()) {
+            path = request.getRequestURI();
+        }
+        // Suppress logs for health check endpoints
+        if (path.equals("/") || path.equals("/health") || path.equals("/actuator/health") || 
+            path.endsWith("/health") || path.isEmpty()) {
             logger.debug("Unauthorized access attempt to {}: {}", path, authException.getMessage());
         } else {
             logger.warn("Unauthorized error: {} - Path: {}", authException.getMessage(), path);
