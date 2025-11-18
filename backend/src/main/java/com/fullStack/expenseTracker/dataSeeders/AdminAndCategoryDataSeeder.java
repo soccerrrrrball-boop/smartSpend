@@ -91,15 +91,17 @@ public class AdminAndCategoryDataSeeder {
         userRepository.save(admin);
         System.out.println("Admin user created successfully: admin@gmail.com");
 
-        // Get transaction types
+        // Get or create transaction types
         TransactionType expenseType = transactionTypeRepository.findByTransactionTypeName(ETransactionType.TYPE_EXPENSE);
         if (expenseType == null) {
-            throw new RuntimeException("TYPE_EXPENSE not found. Make sure TransactionTypeDataSeeder runs first.");
+            System.out.println("TYPE_EXPENSE not found. Creating it...");
+            expenseType = transactionTypeRepository.save(new TransactionType(ETransactionType.TYPE_EXPENSE));
         }
 
         TransactionType incomeType = transactionTypeRepository.findByTransactionTypeName(ETransactionType.TYPE_INCOME);
         if (incomeType == null) {
-            throw new RuntimeException("TYPE_INCOME not found. Make sure TransactionTypeDataSeeder runs first.");
+            System.out.println("TYPE_INCOME not found. Creating it...");
+            incomeType = transactionTypeRepository.save(new TransactionType(ETransactionType.TYPE_INCOME));
         }
 
         // Expense Categories
