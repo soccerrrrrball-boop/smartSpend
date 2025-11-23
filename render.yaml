@@ -4,7 +4,7 @@ services:
     env: docker
     repo: .
     plan: starter
-    dockerCommand: "./mvnw spring-boot:run"
+    dockerfilePath: ./Dockerfile
     envVars:
       - key: SPRING_DATASOURCE_URL
         value: jdbc:mysql://mysql:3306/expenses_tracker?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
