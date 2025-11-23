@@ -6,6 +6,8 @@ services:
     plan: starter
     dockerfilePath: ./Dockerfile
     envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: production
       - key: SPRING_DATASOURCE_URL
         value: jdbc:mysql://mysql:3306/expenses_tracker?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
       - key: SPRING_DATASOURCE_USERNAME
